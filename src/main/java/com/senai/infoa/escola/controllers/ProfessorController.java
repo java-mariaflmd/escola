@@ -8,54 +8,49 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.senai.infoa.escola.models.Estudante;
-import com.senai.infoa.escola.services.EstudanteService;
+import com.senai.infoa.escola.models.Professor;
+import com.senai.infoa.escola.services.ProfessorService;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
-
 @RestController
-@RequestMapping("/estudante")
-public class EstudanteController {
-
+public class ProfessorController {
+    
     @Autowired
-    private EstudanteService estudanteService;
+    private ProfessorService professorService;
 
     @GetMapping("/count")
     public Long contador() {
-        return estudanteService.contador();
+        return professorService.contador();
     }
-    
+
     @DeleteMapping("/delete/{id}")
     public String deletar(@PathVariable Integer id){
-        boolean deletou = estudanteService.delete(id);
+        boolean deletou = professorService.delete(id);
         if(deletou){
             return "Usuário removido com sucesso";
         }
         return "Falha ao remover o usuário";
     }
+
     @PostMapping("/salvar")
-    public Estudante salvar(@RequestBody Estudante estudante) {
-        return estudanteService.salvar(estudante);
+    public Professor salvar(@RequestBody Professor professor) {
+        return professorService.salvar(professor);
     }
     
     @GetMapping("/buscar/{id}")
-    public Estudante buscarPorId(@PathVariable Integer id) {
-        return estudanteService.buscarPorId(id);
+    public Professor buscarPorId(@PathVariable Integer id) {
+        return professorService.buscarPorId(id);
     }
     
     @PutMapping("/atualizar/{id}")
-    public Estudante atualizar(@PathVariable Integer id, @RequestBody Estudante estudante) {
-        return estudanteService.atualizar(estudante, id);
+    public Professor atualizar(@PathVariable Integer id, @RequestBody Professor professor) {
+        return professorService.atualizar(professor, id);
     }
 
     @GetMapping("/listar")
-    public List<Estudante> listarTodos() {
-        return estudanteService.listarTodos();
+    public List<Professor> listarTodos() {
+        return professorService.listarTodos();
     }
-    
 }
